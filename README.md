@@ -4,4 +4,4 @@ OpenALPR (https://github.com/openalpr/openalpr) running in Docker image on Alpin
 
 ## Usage
 
-docker run --rm -ti -v $PWD:/
+docker run --rm -ti -v $PWD:/openalpr wallneradam/docker-openalpr-alpine -c eu test.jpg
