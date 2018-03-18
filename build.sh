@@ -1,4 +1,4 @@
 #!/bin/sh
 
-docker build --rm -t wallneradam/openalpr-alpine:latest .
-docker push wallneradam/openalpr-alpine:latest
+docker build --rm -t wallneradam/docker-openalpr-alpine:latest .
+docker push wallneradam/docker-openalpr-alpine:latest
