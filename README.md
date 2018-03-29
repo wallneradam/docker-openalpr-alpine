@@ -14,7 +14,7 @@ You can use the calibrate utility as well on Linux under X:
 
 ```bash
 docker run --rm -ti \
-    --entrypoint=openalpr-utils-calibrate
+    --entrypoint=openalpr-utils-calibrate \
     -e DISPLAY -v /tmp:/tmp --ipc=host \
     -v $PWD:/openalpr wallneradam/docker-openalpr-alpine -c eu test.jpg
 ```
