@@ -6,6 +6,7 @@ RUN \
     # Install needed libs
  && apk --no-cache add \
     libexecinfo libcurl leptonica log4cplus opencv tesseract-ocr \
+    libcanberra-gtk3 ttf-freefont \
     # Install build dependencies
  && apk --no-cache add --virtual .build-deps \
     ca-certificates wget \
@@ -18,17 +19,16 @@ RUN \
  && sed -i.bak 's/backtrace/0;\/\//' ../daemon.cpp \
     # Build
  && cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_INSTALL_SYSCONFDIR:PATH=/etc .. && \
-    make -j4 && \
+    make -j8 && \
     make install \
     # Clean not needed build directory and dependencies
  && rm -rf /srv/openalpr \
  && apk del .build-deps \
-    # Solves libdc1394 error
- && echo -e "#!/bin/sh\nln /dev/null /dev/raw1394\nexec /usr/bin/alpr \$@" >/usr/local/bin/alpr \
- && chmod a+x /usr/local/bin/alpr \
-     # Create working directory
-&& mkdir /openalpr
+    # Create working directory
+ && mkdir /openalpr
+
+COPY entry.sh /opt/entry.sh
 
 WORKDIR /openalpr
 
-ENTRYPOINT ["alpr"]
+ENTRYPOINT ["/opt/entry.sh"]
